@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registeration</title>
+</head>
+<body>
+  <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+<!-- <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
+<!------ Include the above in your HEAD tag ---------->
+<link rel="stylesheet" href="registration.css">
+<form class="form-horizontal" action='/register' method="POST">
+
+    <div>
+    <div id="legend">
+      <legend style="text-align: center;">Register</legend>
+      <%
+      if(typeof message !=='undefined'){
+      %>
+      <p style="color: rgb(231, 7, 7);text-align: center;"><%= message %></p>
+      <%
+      
+      }
+      %>  
+    </div>
+    <div id="form">
+    <div class="control-group">
+      <!-- Username -->
+    
+      <div class="controls">
+        <input type="text" id="name" name="name" placeholder="ENTER YOUR NAME" class="input-large">
+       
+      </div>
+    </div>
+ 
+    <div class="control-group">
+      <!-- E-mail -->
+   
+      <div class="controls">
+        <input type="text" id="email" name="email" placeholder="ENTER YOUR EMAIL" class="input-large">
+
+      </div>
+    </div><div class="control-group">
+      <!-- Password-->
+ 
+      <div class="controls">
+        <input type="number" id="number" name="number" placeholder="ENTER YOUR PHONE NUMBER" class="input-large">
+        
+      </div>
+      </div>
+    </div>
+ 
+    <div class="control-group">
+      <!-- Password-->
+ 
+      <div class="controls">
+        <input type="password" id="password" name="password" placeholder="ENTER YOUR PASSWORD" class="input-large">
+        
+      </div>
+    </div>
+ 
+    
+ 
+      <!-- Button -->
+      <div class="controls">
+        <button class="btn btn-success">Register</button>
+
+    </div>
+
+  </div>
+
+</form>
+  
+</body>
+</html>
