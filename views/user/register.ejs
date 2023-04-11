@@ -1,78 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registeration</title>
-</head>
-<body>
-  <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
-<!-- <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registeration</title>
+  </head>
+  <body>
+    <link
+      href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
+    <!-- <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
-<!------ Include the above in your HEAD tag ---------->
-<link rel="stylesheet" href="registration.css">
-<form class="form-horizontal" action='/register' method="POST">
+    <!------ Include the above in your HEAD tag ---------->
+    <link rel="stylesheet" href="registration.css" />
+    <form class="form-horizontal" action="/register" method="post">
+      <div>
+        <div id="legend">
+          <legend style="text-align: center; color: white">Register</legend>
+          <% if(typeof message !=='undefined'){ %>
+          <p style="color: rgba(7, 231, 201, 0.986); text-align: center">
+            <%= message %>
+          </p>
+          <% } %>
+        </div>
+        <div id="form">
+          <div class="control-group">
+            <!-- Username -->
 
-    <div>
-    <div id="legend">
-      <legend style="text-align: center;">Register</legend>
-      <%
-      if(typeof message !=='undefined'){
-      %>
-      <p style="color: rgb(231, 7, 7);text-align: center;"><%= message %></p>
-      <%
-      
-      }
-      %>  
-    </div>
-    <div id="form">
-    <div class="control-group">
-      <!-- Username -->
-    
-      <div class="controls">
-        <input type="text" id="name" name="name" placeholder="ENTER YOUR NAME" class="input-large">
-       
-      </div>
-    </div>
- 
-    <div class="control-group">
-      <!-- E-mail -->
-   
-      <div class="controls">
-        <input type="text" id="email" name="email" placeholder="ENTER YOUR EMAIL" class="input-large">
+            <div class="controls">
+              <p id="namefield" style="color: white;"></p>
+              <input
+                required
+                type="text"
+                id="name"
+                name="name"
+                placeholder="ENTER YOUR NAME"
+                class="input-large"
+              />
+            </div>
+           
+          </div>
 
-      </div>
-    </div><div class="control-group">
-      <!-- Password-->
- 
-      <div class="controls">
-        <input type="number" id="number" name="number" placeholder="ENTER YOUR PHONE NUMBER" class="input-large">
-        
-      </div>
-      </div>
-    </div>
- 
-    <div class="control-group">
-      <!-- Password-->
- 
-      <div class="controls">
-        <input type="password" id="password" name="password" placeholder="ENTER YOUR PASSWORD" class="input-large">
-        
-      </div>
-    </div>
- 
-    
- 
-      <!-- Button -->
-      <div class="controls">
-        <button class="btn btn-success">Register</button>
+          <div class="control-group">
+            <!-- E-mail -->
+          
+            <div class="controls">
+              <p id="emailfield" style="color: white;"></p>
+              <input
+                required="email"
+                type="text"
+                id="email"
+                name="email"
+                placeholder="ENTER YOUR EMAIL"
+                class="input-large"
+              />
+            </div>
+          </div>
+          <div class="control-group">
+            <!-- Password-->
+            
+            <div class="controls">
+              <p id="numberfield" style="color: white;"></p>
+              <input
+                type="number"
+                id="number"
+                name="number"
+                placeholder="ENTER YOUR PHONE NUMBER"
+                class="input-large"
+              />
+            </div>
+          </div>
+        </div>
 
-    </div>
+        <div class="control-group">
+          <!-- Password-->
+         
+          <div class="controls">
+            <p id="passwordfield" style="color: white;"></p>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="ENTER YOUR PASSWORD"
+              class="input-large"
+            />
+          </div>
+        </div>
 
-  </div>
-
-</form>
-  
-</body>
+        <!-- Button -->
+        <div class="controls">
+          <button onclick=validation() style="background-color: aliceblue; color: black" class="btn">
+            Register
+          </button>
+          <p>
+            <a
+              style="
+                color: rgb(245, 232, 232);
+                font-family: 'Lucida Sans', 'Lucida Sans Regular',
+                  'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana,
+                  sans-serif;
+              "
+              href="/login"
+              >login
+            </a> 
+          </p>
+        </div>
+      </div>
+    </form>
+  </body>
 </html>
+
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+</style>
+
+<script>
+  function validation(){
+   let name=document.getElementById("name").value
+   let email=document.getElementById("email").value
+   let number=document.getElementById("number").value
+   let password=document.getElementById("password").value
+
+   if(name==""){
+
+    document.getElementById("namefield").innerHTML="Please fill the name field"
+    }
+    else{
+      document.getElementById("namefield").innerHTML=""
+    }
+    if(email==""){
+      document.getElementById("emailfield").innerHTML="Please fill the email field"
+    }
+    else{
+      document.getElementById("emailfield").innerHTML=""
+    }
+
+    if(number==""){
+      document.getElementById("numberfield").innerHTML="please fill the number field"
+    }
+    else{
+      document.getElementById("numberfield").innerHTML=""
+    }
+    if(password==""){
+      document.getElementById("passwordfield").innerHTML="please fill the password field"
+    }
+else{
+  document.getElementById("passwordfield").innerHTML=""
+
+
+}
+
+
+  }
+
+</script>

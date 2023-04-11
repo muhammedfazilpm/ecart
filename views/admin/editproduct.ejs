@@ -1,0 +1,50 @@
+<%- include("../admin/layouts/admin_header.ejs")%>
+<form action="" method="post" enctype="multipart/form-data">
+<div class="col-sm-12 col-xl-6">
+    <div class="bg-light rounded h-100 p-4">
+        <h6 class="mb-4">Floating Label</h6>
+        <div class="form-floating mb-3">
+            <input name="name" type="text" class="form-control" value="<%=edit.name %>" id="floatingInput" required>
+            <label for="floatingInput">Brand Name</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input name="Quantity" type="number" class="form-control" value="<%=edit.Quantity %>" id="floatingInput" required>
+            <label for="floatingInput">STOCK</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input name="prize" type="number" class="form-control" value="<%=edit.prize %>" id="floatingInput" required>
+            <label for="floatingInput">PRIZE</label>
+        </div>
+        <img style="width: 30%;" src="../images/<%=edit.image %> " alt="">
+        <div class="form-floating mb-3">
+            <input multiple name="image" type="file" class="form-control"value="<%=edit.image %>" id="floatingPassword"
+                placeholder="Password"  >
+            <label for="floatingPassword">image</label>
+        </div>
+        
+           
+        <div class="form-floating mb-3">
+            <select class="form-select" id="floatingSelect"
+                aria-label="Floating label select example">
+                <option name="catogary" selected><%=edit.catogary %></option>
+                <% if(cat.length>0){
+                for(let i=0;i < cat.length;i++){%>
+                <option><%=cat[i].name%></option>
+                <%}}%>
+            </select>
+            <label for="floatingSelect">Works with selects</label>
+        </div>
+      
+        <div class="form-floating">
+            <textarea class="form-control" typ  required
+                id="floatingTextarea" style="height: 150px;" ><%=edit.description %></textarea>
+            <label for="floatingTextarea"></label>
+        </div>
+        <input type="hidden" name="id" value="<%=edit.id %>">
+    <button type="submit" class="btn btn-success m-2">SUBMIT</button>
+
+    </div>
+    
+</div>
+</form>
+<%- include("../admin/layouts/admin_footer.ejs")%>

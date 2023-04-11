@@ -1,0 +1,94 @@
+<%- include("../admin/layouts/admin_header.ejs")%>
+<!-- <div class="col-sm-12 col-xl-6">
+    <div class="bg-light rounded h-100 p-4">
+        <h6 class="mb-4">Color Table</h6> -->
+        <!-- <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">no</th>
+                    <th scope="col">catogary</th>
+                    <th scope="col">delete</th>
+                    <th scope="col">status</th>
+        
+                    <th scope="col">block</th>
+        
+                  <button type="button" class="btn btn-danger m-2">*<a style="color: blanchedalmond;" href="/admin/addcatogary">addcatogary</a></button>
+                    </tr></button>
+            </thead>
+            <tbody>
+
+                <%
+                if(catogaries.length>0){
+
+                  for(let i=0;i < catogaries.length;i++){
+                                               %>
+
+                <tr>
+                    <th scope="row"><%=i+1%></th>
+                    <td><%= catogaries[i].name %></td>
+                    <td><a href="/admin/delete-catogary?id=<%= catogaries[i]._id %>">delete</a></td>
+                    <% if (catogaries[i].blocked==0) { %>
+                        <td>Active</td>
+                        <td><a style="color:rgb(199, 9, 9);" href="/admin/block-catogary?id=<%=catogaries[i]._id %>">BLOCK</a></td>
+                        <% } else { %>
+                          <td>Blocked</td>
+                          <td><a style="color: greenyellow;" href="/admin/unblock-catogary?id=<%=catogaries[i]._id%>">UNBLOCK</a></td>
+                          <% } %>
+                </tr>
+                <%
+            
+            }
+    
+        }  %>
+        
+            </tbody>
+        </table> -->
+
+<!-- ----------------------------------------------------------------------- -->
+<div class="col-12">
+    <div class="bg-light rounded h-100 p-4">
+        <h6 class="mb-4">CATEGORY TABLE </h6>
+        <button type="button" class="btn btn-danger m-2">*<a style="color: blanchedalmond;" href="/admin/addcatogary">ADD CATEGORY</a></button>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">no</th>
+                        <th scope="col">CATEGORY</th>
+                        <th scope="col">DELETE</th>
+                        <th scope="col">STATUS</th>
+                        <th scope="col">BLOCK</th>
+                       
+                </thead>
+                <tbody>
+                    <%
+                    if(catogaries.length>0){
+    
+                      for(let i=0;i < catogaries.length;i++){
+                                                   %>
+    
+                    <tr>
+                        <th scope="row"><%=i+1%></th>
+                        <td><%= catogaries[i].name %></td>
+                        <td><a href="/admin/delete-catogary?id=<%= catogaries[i]._id %>">delete</a></td>
+                        <% if (catogaries[i].blocked==0) { %>
+                            <td>Active</td>
+                            <td><a style="color:rgb(199, 9, 9);" href="/admin/block-catogary?id=<%=catogaries[i]._id %>">BLOCK</a></td>
+                            <% } else { %>
+                              <td>Blocked</td>
+                              <td><a style="color: rgb(10, 10, 9);" href="/admin/unblock-catogary?id=<%=catogaries[i]._id%>">UNBLOCK</a></td>
+                              <% } %>
+                    </tr>
+                    <% } }%>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- ------------------------------------------------------------------------- -->
+
+
+<%- include("../admin/layouts/admin_footer.ejs")%>

@@ -1,0 +1,91 @@
+<%- include("../admin/layouts/admin_header.ejs")%>
+
+<form action="" method="post" enctype="multipart/form-data">
+   
+<div class="col-sm-12 col-xl-6">
+    <div class="bg-light rounded h-100 p-4">
+        <h6 class="mb-4">Floating Label</h6>
+        <div class="form-floating mb-3">
+            <input id="company" name="name" type="text" class="form-control" id="floatingInput" required>
+            <label for="floatingInput">company</label>
+        </div>
+        <p id="companyval"></p>
+        <div class="form-floating mb-3">
+            <select  name="catogary" class="form-select" id="floatingSelect"
+                aria-label="Floating label select example">
+                <option selected>catogaries</option>
+               <% if(catDatas.length>0){
+                    for(let i=0;i < catDatas.length;i++){
+                                                 %>
+          <option value="<%= catDatas[i].name %>"><%= catDatas[i].name %></option>
+                <%  }
+         } %>
+           
+            </select>
+            <label for="floatingSelect">for catogary</label>
+        </div>
+        
+        <div class="form-floating mb-3">
+            <input name="stock" type="number" class="form-control" id="floatingInput" required>
+            <label for="floatingInput">stock number</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input name="prize" type="number" class="form-control" id="floatingInput"required>
+            <label for="floatingInput">Prize</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input name="image" type="file" class="form-control" id="floatingInput"
+                placeholder="name@example.com" multiple >
+            <label for="floatingInput">Product image</label>
+        </div>
+        <div class="form-floating">
+            <textarea required name="description" class="form-control"
+                id="floatingTextarea" style="height: 150px;"></textarea>
+            <label for="floatingTextarea">PRODUCT DISCRIPTION</label>
+        </div>
+        <button onclick=validation() type="submit" class="btn btn-success m-2">Add product</button>
+    </div>
+    
+   
+</div>
+ 
+</form> 
+<%- include("../admin/layouts/admin_footer.ejs")%>
+
+<script>
+function validation(){
+   const company=document.getElementById("company").value
+   const stock =document.getElementById("sock").value
+   const Prize=document.getElementById("prize").value
+   const description=document.getElementById("discription").value
+
+
+if(company==""){
+    document.getElementById("companyval").innerHTML="*Please the catogary field"
+}
+else{
+    document.getElementById("companyval").innerHTML=""
+}
+if(stock==""){
+    document.getElementById("stockval").innerHTML="*Please fill the stock field"
+}
+else{
+    document.getElementById("stockval").innerHTML=""
+}
+if(prize==""){
+    document.getElementById("prizeval").innerHTML="*Please fill the name field "
+}
+else{
+    document.getElementById("prizeval").innerHTML=""
+}
+if(description==""){
+    document.getElementById("descriptionval").innerHTML=" *Please the description fild"
+
+}
+else{
+    document.getElementById("descriptionval").innerHTML=""
+
+}
+
+}
+</script>
