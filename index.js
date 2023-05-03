@@ -4,7 +4,7 @@ const path = require("path");
 const express = require("express");
 const app = express();
 
-const PORT = 3000;
+const PORT = 3000
 // making the folers public
 app.use(express.static(path.join(__dirname, "public/user")));
 app.use(express.static(path.join(__dirname, "public/admin")));
