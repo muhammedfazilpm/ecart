@@ -1,10 +1,10 @@
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://127.0.0.1:27017/eCommerce");
+mongoose.connect("mongodb+srv://globalone:6YwcZ4Nc6Eatavfd@globalone.xczobtq.mongodb.net/eCommerce");
 const path = require("path");
 const express = require("express");
 const app = express();
 
-const PORT = 8080;
+const PORT = 3000;
 // making the folers public
 app.use(express.static(path.join(__dirname, "public/user")));
 app.use(express.static(path.join(__dirname, "public/admin")));
