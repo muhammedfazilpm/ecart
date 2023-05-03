@@ -1,47 +1,93 @@
 <%- include("../admin/layouts/admin_header.ejs")%>
 <div class="col-12">
     <div class="bg-light rounded h-100 p-4">
-        <h6 class="mb-4">Responsive Table</h6>
+        <h6 class="mb-4">Order Table</h6>
         <div class="table-responsive">
-            <table class="table">
+            <table class="table table-bordered">
                 <thead>
-                    <tr>
-                        <th scope="col">NO</th>
-                        <th scope="col">NAME</th>
-                        <th scope="col">DATE</th>
-                        <th scope="col">ADDRESS</th>
-                        <th scope="col">PRIZE</th>
-                        <th scope="col">PAYMENT</th>
-                        <th scope="col">STATUS</th>
-                        <th scope="col">ACTION</th>
-                        <th scope="col">CANCEL</th>
-                    </tr>
+                  <tr>
+                    <th scope="col">NO</th>
+                    <th scope="col">NAME</th>
+                    <th scope="col">DATE</th>
+                    <th scope="col">PRIZE</th>
+                    <th scope="col">PAYMENT</th>
+                    <th scope="col">STATUS</th>
+                    <th scope="col">ACTION</th>
+                    <th scope="col">CANCEL</th>
+                    <th scope="col">VIEW</th>
+                    <th scope="col">MAKE DELIVERY</th>
+
+                  </tr>
                 </thead>
                 <tbody>
-                    <%for(let i=0;i < orderdata.length;i++){%>
-                    <tr>
-                        <th scope="row"><%=i+1%></th>
-                        <td><%=orderdata[i].user%></td>
-                        <td><%=orderdata[i].date.toISOString().substring(0,10) %></td>
-                        <td><%=orderdata[i].deliverydetails.substring(12,20)%> <br><%=orderdata[i].deliverydetails.substring(40,58)%> <br><%=orderdata[i].deliverydetails.substring(58,150)%></td>
-                        <td><%=orderdata[i].totalamount%></td>
-                        <td><%=orderdata[i].paymentmethod%></td>
-                      
-                        <% if (orderdata[i].status=="PLACED") { %>
-                            <td>PLACED</td>
-                            <td><a style="color:rgb(8, 8, 8);" href="/admin/makepending?id=<%=orderdata[i]._id%>"> <button type="button" class="btn btn-success m-2">MAKE PENDING</button></a></td>
-                            <% } else { %>
-                              <td>PENDING</td>
-                         
-                              <td><a style="color: rgb(172, 81, 7);" href="/admin/placeOredr?id=<%=orderdata[i]._id%>">  <button type="button" class="btn btn-danger m-2">PLACE ORDER</button></a></td>
-                              <% } %>
-                              <td><a style="color: rgb(172, 81, 7);" href="/admin/cancelorder?id=<%=orderdata[i]._id%>">  <button type="button" class="btn btn-danger m-2">CANCEL ORDER</button></a></td>
+                  <% for (let i = 0; i < orderdata.length; i++) { %>
+                  <tr>
+                    <th scope="row"><%= i+1 %></th>
+                    <td><%= orderdata[i].user %></td>
+                    <td><%= orderdata[i].date.toISOString().substring(0,10) %></td>
+                    <td><%= orderdata[i].totalamount %></td>
+                    <td><%= orderdata[i].paymentmethod %></td>
+                    <% if (orderdata[i].status == "PLACED") { %>
+                    <td class="text-success"><%=orderdata[i].status%></td>
+                   
+                    <td>
+                      <a href="/admin/makepending?id=<%= orderdata[i]._id %>" class="btn btn-success btn-sm">
+                        MAKE PENDING
+                      </a>
+                    </td>
+                   
+                    <td>
+                      <a href="/admin/cancelorder?id=<%= orderdata[i]._id %>" class="btn btn-danger btn-sm">
+                        CANCEL ORDER
+                      </a>
+                    </td>
+                    <% } else if (orderdata[i].status == "CANCELED") { %>
+                    <td class="text-danger">CANCELED</td>
+                   
+                    <td>
+                      <a href="#" class="btn btn-primary btn-sm disabled">
+                        CANCELED
+                      </a>
+                    </td>
+                   
+                  
+                    <td>
+                      <a href="#" class="btn btn-primary btn-sm disabled">
+                        ORDER CANCELED
+                      </a>
+                    </td>
+                    <% } else { %>
+                    <td class="text-warning"><%=orderdata[i].status%></td>
+                    <td>
+                      <a href="/admin/placeOredr?id=<%= orderdata[i]._id %>" class="btn btn-danger btn-sm">
+                        PLACE ORDER
+                      </a>
+                    </td>
+                    <td>
+                      <a href="/admin/cancelorder?id=<%= orderdata[i]._id %>" class="btn btn-danger btn-sm">
+                        CANCEL ORDER
+                      </a>
+                    </td>
+                    <% } %>
+                    <td>
+                      <a href="/admin/vieworder?id=<%= orderdata[i]._id %>" class="btn btn-warning btn-sm">
+                        VIEW
+                      </a>
+                    </td>
+                    <% if (orderdata[i].status == "PLACED") { %>
+                  <td><a href="/admin/deliver?id=<%= orderdata[i]._id %>" class="btn btn-danger btn-sm">DELIVER</a></td>
+                  <%} else {%>
+                    <td><%=orderdata[i].status%></td>
+                    <%}%>
+                  </tr>
+                  <% } %>
 
-                    </tr>
-                  <%}%>
                 </tbody>
+              </table>
+              
             </table>
         </div>
     </div>
 </div>
+<script> document.getElementById("3").classList.add("active") </script>
 <%- include("../admin/layouts/admin_footer.ejs")%>

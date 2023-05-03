@@ -8,6 +8,14 @@
     <meta content="" name="keywords">
     <meta content="" name="description">
 
+<!-- jQuery CDN link -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- SweetAlert CDN links -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+
+
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
@@ -46,7 +54,7 @@
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-light navbar-light">
                 <a href="index.html" class="navbar-brand mx-4 mb-3">
-                    <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>GLOBALCYCLE ADMIN</h3>
+                    <h3 class="text-primary">GLOBALCYCLE <br> ADMIN</h3>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
@@ -59,22 +67,27 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="/admin/Dashboard" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <div class="nav-item dropdown">
-                        <a href="/admin/product" class="nav-link " ><i class="fa fa-laptop me-2"></i>Products</a>
+                    
+                    <div  class="nav-item dropdown">
+                        <a  id="1" href="/admin/Dashboard" class="nav-link " ><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                        <a  id="2" href="/admin/product" class="nav-link " ><i class="fa fa-laptop me-2"></i>Products</a>
                         
                     </div>
                     <div class="nav-item dropdown">
-                        <a href="/admin/order" class="nav-link " ><i class="fa fa-laptop me-2"></i>Orders</a>
+                       
+                        <a id="3" href="/admin/order" class="nav-link " ><i class="fa fa-laptop me-2"></i>Orders</a>
+                        <a id="4" href="/admin/salesreport" class="nav-link " ><i class="fa fa-laptop me-2"></i>Sales Report</a>
                         
                     </div>
-                    <a href="/admin/catogary" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Catagories</a>
+                    <a id="0" href="/admin/catogary" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Catagories</a>
                    
-                    <a href="/admin/user" class="nav-item nav-link"><i class="fa fa-table me-2"></i>User_details</a>
+                    <a id="5" href="/admin/user" class="nav-item nav-link"><i class="fa fa-table me-2"></i>User_details</a>
+
+                    <a  href="/admin/coupon" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Coupon</a>
                    
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
-                        <div class="dropdown-menu bg-transparent border-0">
+                        <div id="6" class="dropdown-menu bg-transparent border-0">
                             <a href="signin.html" class="dropdown-item">Sign In</a>
                             <a href="signup.html" class="dropdown-item">Sign Up</a>
                             <a href="404.html" class="dropdown-item">404 Error</a>

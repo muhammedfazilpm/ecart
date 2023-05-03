@@ -12,9 +12,7 @@
       rel="stylesheet"
       id="bootstrap-css"
     />
-    <!-- <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
-    <!------ Include the above in your HEAD tag ---------->
+
     <link rel="stylesheet" href="registration.css" />
     <form class="form-horizontal" action="/register" method="post">
       <div>
@@ -31,7 +29,7 @@
             <!-- Username -->
 
             <div class="controls">
-              <p id="namefield" style="color: white;"></p>
+              <p id="namefield" style="color: white"></p>
               <input
                 required
                 type="text"
@@ -41,14 +39,13 @@
                 class="input-large"
               />
             </div>
-           
           </div>
 
           <div class="control-group">
             <!-- E-mail -->
-          
+
             <div class="controls">
-              <p id="emailfield" style="color: white;"></p>
+              <p id="emailfield" style="color: white"></p>
               <input
                 required="email"
                 type="text"
@@ -61,9 +58,9 @@
           </div>
           <div class="control-group">
             <!-- Password-->
-            
+
             <div class="controls">
-              <p id="numberfield" style="color: white;"></p>
+              <p id="numberfield" style="color: white"></p>
               <input
                 type="number"
                 id="number"
@@ -77,9 +74,9 @@
 
         <div class="control-group">
           <!-- Password-->
-         
+
           <div class="controls">
-            <p id="passwordfield" style="color: white;"></p>
+            <p id="passwordfield" style="color: white"></p>
             <input
               type="password"
               id="password"
@@ -92,7 +89,11 @@
 
         <!-- Button -->
         <div class="controls">
-          <button onclick=validation() style="background-color: aliceblue; color: black" class="btn">
+          <button
+            onclick="validation()"
+            style="background-color: aliceblue; color: black"
+            class="btn"
+          >
             Register
           </button>
           <p>
@@ -105,7 +106,7 @@
               "
               href="/login"
               >login
-            </a> 
+            </a>
           </p>
         </div>
       </div>
@@ -123,42 +124,36 @@
 </style>
 
 <script>
-  function validation(){
-   let name=document.getElementById("name").value
-   let email=document.getElementById("email").value
-   let number=document.getElementById("number").value
-   let password=document.getElementById("password").value
+  function validation() {
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let number = document.getElementById("number").value;
+    let password = document.getElementById("password").value;
 
-   if(name==""){
+    if (name == "") {
+      document.getElementById("namefield").innerHTML =
+        "Please fill the name field";
+    } else {
+      document.getElementById("namefield").innerHTML = "";
+    }
+    if (email == "") {
+      document.getElementById("emailfield").innerHTML =
+        "Please fill the email field";
+    } else {
+      document.getElementById("emailfield").innerHTML = "";
+    }
 
-    document.getElementById("namefield").innerHTML="Please fill the name field"
+    if (number == "") {
+      document.getElementById("numberfield").innerHTML =
+        "please fill the number field";
+    } else {
+      document.getElementById("numberfield").innerHTML = "";
     }
-    else{
-      document.getElementById("namefield").innerHTML=""
+    if (password == "") {
+      document.getElementById("passwordfield").innerHTML =
+        "please fill the password field";
+    } else {
+      document.getElementById("passwordfield").innerHTML = "";
     }
-    if(email==""){
-      document.getElementById("emailfield").innerHTML="Please fill the email field"
-    }
-    else{
-      document.getElementById("emailfield").innerHTML=""
-    }
-
-    if(number==""){
-      document.getElementById("numberfield").innerHTML="please fill the number field"
-    }
-    else{
-      document.getElementById("numberfield").innerHTML=""
-    }
-    if(password==""){
-      document.getElementById("passwordfield").innerHTML="please fill the password field"
-    }
-else{
-  document.getElementById("passwordfield").innerHTML=""
-
-
-}
-
-
   }
-
 </script>

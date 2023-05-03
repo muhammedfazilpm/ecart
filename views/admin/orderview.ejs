@@ -1,0 +1,83 @@
+<%- include("../admin/layouts/admin_header.ejs")%>
+
+<div class="col-12">
+  <div class="bg-light rounded h-100 p-4">
+    <h6 class="mb-4">USER DETAILS</h6>
+    <div style="border: 1px solid black" class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th style="border: 1px solid black" scope="col">CUSTOMER NAME</th>
+
+            <th style="border: 1px solid black" scope="col">
+              CUSTOMER ADDRESS
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th style="border: 1px solid black" scope="row">
+              <%=details.user%>
+            </th>
+
+            <th style="border: 1px solid black" scope="row">
+              <p>
+                address:<%=details.deliverydetails.toString().substring(3,20)%>
+                <br /><%=details.deliverydetails.toString().substring(21,45)%>
+                <br /><%=details.deliverydetails.toString().substring(45,80)%>
+                <br /><%=details.deliverydetails.toString().substring(81,102)%>
+                <br /><%=details.deliverydetails.toString().substring(102,135)%>
+                <br />
+                <%=details.deliverydetails.toString().substring(136,151)%>
+                <br /><%=details.deliverydetails.toString().substring(152,176)%>
+              </p>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div class="bg-light rounded h-100 p-4">
+      <h6 class="mb-4">ORDER DETAILS</h6>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">ORDER ID</th>
+              <th scope="col">PRODUCT NAME</th>
+              <th scope="col">AMOUNT</th>
+              <th scope="col">QUANTITY</th>
+              <th scope="col">PAYMENT</th>
+              <th scope="col">STATUS</th>
+              <th scope="col">IMAGE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%for(i=0;i < products.length;i++){%>
+            <tr>
+              <th scope="row"><%=details._id%></th>
+              <th scope="row"><%=products[i].productId.name%></th>
+              <th scope="row"><%=details.totalamount%></th>
+              <th scope="row"><%=details.product[i].quantity%></th>
+              <th scope="row"><%=details.paymentmethod%></th>
+              <th scope="row"><%=details.status%></th>
+              <th scope="row">
+                <img
+                  style="width: 50%; height: 50%"
+                  src="<%=products[i].productId.image[0]%>"
+                  alt="abc"
+                />
+              </th>
+
+              <%}%>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <%- include("../admin/layouts/admin_footer.ejs")%>
+  </div>
+</div>

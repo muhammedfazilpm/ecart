@@ -1,60 +1,83 @@
 <%- include("../admin/layouts/admin_header.ejs")%>
 
 <div class="col-12">
-    <div class="bg-light rounded h-100 p-4">
-        <h6 class="mb-4">Responsive Table</h6>
-        <div style="padding-left: 25%;"></div>
-        <button type="button" class="btn btn-dark m-2"><a style="color: aliceblue;" href="/admin/addproduct">ADD PRODUCTS</a></button>
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Company Name</th>
-                        <th scope="col">Image</th>
-                        <th scope="col">Catogary</th>
-                        <th scope="col">Stock</th>
-                        <th scope="col">prize</th>
-                        <th scope="col">Action</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Block</th>
-                        <th scope="col">EDIT</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <%
-                    if(products.length>0){
+  <div class="bg-light rounded h-100 p-4">
+    <h6 class="mb-4">Product</h6>
+    <div style="padding-left: 25%"></div>
+    <button type="button" class="btn btn-dark m-2">
+      <a style="color: aliceblue" href="/admin/addproduct">ADD PRODUCTS</a>
+    </button>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Company Name</th>
+            <th scope="col">Image</th>
+            <th scope="col">Catogary</th>
+            <th scope="col">Stock</th>
+            <th scope="col">prize</th>
 
-                      for(let i=0;i < products.length;i++){
-                                                   %>
-                    <tr>
-                        <td><%= i+1 %></td>
-                        <td><%= products[i].name %></td>
-                        <td style="width: 10%;"><img style="width: 100%;" src="../images/<%= products[i].image[0] %>" alt="test" srcset=""></td>
-                        <td><%= products[i].catogary %></td>
-                        <td><%= products[i].Quantity %></td>
-                        <td><%= products[i].prize %></td>
-                        <td><a href="/admin/delete-product?id=<%= products[i]._id %>">delete</a></td>
-                        <% if (products[i].blocked==0) { %>
-                            <td>Active</td>
-                            <td><a style="color:rgb(8, 8, 8);" href="/admin/block-product?id=<%=products[i]._id%>">BLOCK</a></td>
-                            <% } else { %>
-                              <td>Blocked</td>
-                              <td><a style="color: rgb(172, 81, 7);" href="/admin/unblock-product?id=<%=products[i]._id%>">UNBLOCK</a></td>
-                              <% } %>
-                              <td><a href="/admin/edit-product?id=<%= products[i]._id %>">EDIT</a></td>
-                    </tr>
-                    <%
-            
-                }
-        
-            } %>
-                   
-                </tbody>
-            </table>
-        </div>
+            <th scope="col">Status</th>
+            <th scope="col">Block</th>
+            <th scope="col">EDIT</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if(products.length>0){ for(let i=0;i < products.length;i++){ %>
+          <tr>
+            <td><%= i+1 %></td>
+            <td><%= products[i].name %></td>
+            <td style="width: 10%">
+              <img
+                style="width: 100%"
+                src="<%= products[i].image[0] %>"
+                alt="test"
+                srcset=""
+              />
+            </td>
+            <td><%= products[i].catogary %></td>
+            <td><%= products[i].Quantity %></td>
+            <td><%= products[i].prize %></td>
+
+            <% if (products[i].blocked==0) { %>
+            <td>Active</td>
+            <td>
+              <a
+                style="color: rgb(8, 8, 8)"
+                href="/admin/block-product?id=<%=products[i]._id%>"
+                >BLOCK</a
+              >
+            </td>
+            <% } else { %>
+            <td>Blocked</td>
+            <td>
+              <a
+                style="color: rgb(172, 81, 7)"
+                href="/admin/unblock-product?id=<%=products[i]._id%>"
+                >UNBLOCK</a
+              >
+            </td>
+            <% } %>
+            <td>
+              <a href="/admin/edit-product?id=<%= products[i]._id %>">EDIT</a>
+            </td>
+            <td>
+              <a href="/admin/delete-product?id=<%= products[i]._id %>"
+                >delete</a
+              >
+            </td>
+          </tr>
+
+          <% } } %>
+        </tbody>
+      </table>
     </div>
+  </div>
 </div>
-
+<script>
+  document.getElementById("2").classList.add("active");
+</script>
 
 <%- include("../admin/layouts/admin_footer.ejs")%>

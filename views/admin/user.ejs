@@ -15,7 +15,7 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th scope="col">#</th>
+                                            <th scope="col">NO</th>
                                             <th scope="col">Name</th>
                                             <th scope="col">Email</th>
                                             <th scope="col">Mobile</th>
@@ -35,9 +35,12 @@
                                             <td><%= users[i].name %></td>
                                             <td><%= users[i].email %></td>
                                             <td><%= users[i].mob %></td>
-                                            <td><%= users[i].is_varified %></td>
+                                            <%if( users[i].is_varified ){%>
+                                            <td>verified</td>
+                                            <%}else{%>
+                                                <td style="color: red;">Notverified</td>
                                             
-                                            
+                                            <%}%>
                                             <% if(users[i].is_block==1){ %>
                                                 <td><button class="btn btn-danger btn-lg btn-block"> <a style="color: aliceblue;" href="/admin/block-user?id=<%= users[i]._id %>"> unblock </a></button></td>
 
@@ -71,6 +74,7 @@
             <!-- Table End -->
 
 
+            <script> document.getElementById("5").classList.add("active") </script>
 
 
             <%- include("../admin/layouts/admin_footer.ejs")%>

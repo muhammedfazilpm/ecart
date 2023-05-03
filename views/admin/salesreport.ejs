@@ -1,0 +1,78 @@
+<%- include("../admin/layouts/admin_header.ejs")%>
+<div class="col-12">
+  <div class="bg-light rounded h-100 p-4">
+    <h6 class="mb-4">SALES REPORT</h6>
+    <div style="margin-left: 10%; display: block">
+      <form action="/admin/sortdate" method="post">
+        from <input required name="from" type="date" /> to
+        <input name="to" type="date" required />
+        <button class="btn btn-success btn-sm">search</button>
+        <a href="/admin/download?sort=<%=orderdetails%>"
+          ><button type="button" class="btn btn-danger btn-sm">
+            DOWNLOAD
+          </button></a
+        >
+      </form>
+    </div>
+    <div class="table-responsive">
+      <table class="table">
+        <table
+          style="
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 800px;
+            margin: auto;
+          "
+        >
+          <thead style="background-color: #f2f2f2">
+            <tr>
+              <th style="border: 1px solid #ddd; padding: 8px">NO</th>
+              <th style="border: 1px solid #ddd; padding: 8px">ORDER ID</th>
+              <th style="border: 1px solid #ddd; padding: 8px">USER</th>
+              <th style="border: 1px solid #ddd; padding: 8px">PRIZE</th>
+              <th style="border: 1px solid #ddd; padding: 8px">PAYMENT TYPE</th>
+              <th style="border: 1px solid #ddd; padding: 8px">STATUS</th>
+              <th style="border: 1px solid #ddd; padding: 8px">
+                DATE OF PURCHASE
+              </th>
+              <th style="border: 1px solid #ddd; padding: 8px">PRODUCTS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(let i=0 ; i < orderdetails.length ; i++){%>
+            <tr style="background-color: #fff">
+              <td style="border: 1px solid #ddd; padding: 8px"><%=i+1%></td>
+              <td style="border: 1px solid #ddd; padding: 8px">
+                <%=orderdetails[i]._id%>
+              </td>
+              <td style="border: 1px solid #ddd; padding: 8px">
+                <%=orderdetails[i].user%>
+              </td>
+              <td style="border: 1px solid #ddd; padding: 8px">
+                <%=orderdetails[i].totalamount%>
+              </td>
+              <td style="border: 1px solid #ddd; padding: 8px">
+                <%=orderdetails[i].paymentmethod%>
+              </td>
+              <td style="border: 1px solid #ddd; padding: 8px">
+                <%=orderdetails[i].status%>
+              </td>
+              <td style="border: 1px solid #ddd; padding: 8px">
+                <%=orderdetails[i].date.toISOString().substring(0,10)%>
+              </td>
+              <td style="border: 1px solid #ddd; padding: 8px">
+                <%=orderdetails[i].product.length%>
+              </td>
+            </tr>
+            <%}%>
+          </tbody>
+        </table>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById("4").classList.add("active");
+</script>
+<%- include("../admin/layouts/admin_footer.ejs")%>

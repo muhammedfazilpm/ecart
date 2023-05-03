@@ -1,32 +1,101 @@
 <%- include("../user/layout/userheader.ejs")%>
-<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-<div  class="nav-item dropdown">
-                
-    <div style="padding-left: 50%;">  <a style="color: #dfe1ec;font-size: larger;" href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i  class="far fa-file-alt me-2"></i>CATEGORY</a>
+
+
    
-     <div  class="dropdown-menu bg-transparent border-20">
-         <% for(let i=0;i < category.length;i++){%>
-       <h4>  <a  style="background-color: #122ecc;" href="/category?name=<%= category[i].name %>" class="dropdown-item" ><%=category[i].name%></a></h4>
-         <%}%>
-     </div>
+
+
+
+        <!-- Navbar -->
+<nav style="background-color: white;" class="navbar navbar-expand-lg navbar">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Navbar brand -->
+      <!-- <a class="navbar-brand" href="#">Navbar</a>
+   -->
+      <!-- Toggle button -->
+      <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+        data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <i class="fas fa-bars text-light"></i>
+      </button>
   
- </div>
+      <!-- Collapsible wrapper -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Left links -->
+        <ul class="navbar-nav me-auto d-flex flex-row mt-3 mt-lg-0">
+          <li class="nav-item text-center mx-2 mx-lg-1">
+         
+            <div class="ml-auto" style="display: flex;">
+            <div class="navbar-nav ms-auto d-flex flex-row mt-3 mt-lg-0"  class="nav-link  btn btn-primary"  class="nav-item dropdown">
+                
+                <div >  <a  href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i  class="far fa-file-alt me-2"> </i>  CATEGORY</a>
+               
+                 <div  class="dropdown-menu bg-transparent border-2">
+                     <% for(let i=0;i < category.length;i++){%>
+                   <h4>  <a  style="background-color: #5165b6;" href="/category?name=<%= category[i].name %>&sort=&search=&pagination=" class="dropdown-item" ><%=category[i].name%></a></h4>
+                     <%}%>
+                     
+                 </div>
+                 
+                </div>
+               
+             </div> 
+            
+            <!-- Dropdown menu -->
+          
+        <!-- Left links -->
+  
+        <!-- Right links -->
+        <ul class="navbar-nav ms-auto d-flex flex-row mt-3 mt-lg-0">
+          <li class="nav-item text-center mx-2 mx-lg-1">
+            
+          </li>
+          <li class="nav-item text-center mx-2 mx-lg-1">
+           
+          </li>
+        </ul>
+        <!-- Right links -->
+        <!-- Example single danger button -->
+<div  class="btn-group">
+  <button style="background-color: black;color: white;" type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    SORT BY PRIZE
+  </button>
+  <div class="dropdown-menu">
+    <a  class="dropdown-item" href="/sort?category=<%=category1%>&sort=1">PRIZE LOW TO HIGH</a>
+    <a  class="dropdown-item" href="/desort?category=<%=category1%>&sort=2">PRIZE HIGH TO LOW</a>
+    
+ 
+</div>
+        <!-- Search form -->
+        <div class="md-auto">
+        <form  action="/search?" method="post" class="d-flex input-group w-auto ms-lg-3 my-3 my-lg-0">
+          <input name="search" type="search" class="form-control" placeholder="Search" aria-label="Search" />
+          <input type="hidden" name="category" value="<%=category1%>">
+          <input name="sort" type="hidden" value="<%=sort%>">
+          <button class="btn btn-dark" type="submit" data-mdb-ripple-color="dark">
+            Search
+          </button>
+        </form>
+        
+    </div>
+      </div>
+    </div>
+    
+  </nav>
+  <!-- Navbar -->
 
 
-
-
-    <!-- ------------------------------------------------------------------------------------------------------------- -->
-    <div class="row">
+    <div style="display: flex;" class="row">
    
     <% for(let i=0;i < products.length;i++){%>
-    <div class="col-md-4 mt-2">
+    <div  class="col-md-4 mt-2">
      
          
          <div  class="card">
-                             <div  class="card-body">
+                             <div style="height: 45vh;" class="card-body">
                                  <div   class="card-img-actions">
                                    
-                                         <img  src="../images/<%=products[i].image[0]%>" class="card-img img-fluid" width="96" height="350" alt="">
+                                         <img  src="<%=products[i].image[0]%>" class="card-img img-fluid" width="96" height="350" alt="">
                                        
                                     
                                  </div>
@@ -54,10 +123,10 @@
 
                                  <button onclick="showid('<%=products[i]._id%>')" type="button" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i> Add to cart</button>
 
-                                 <button type="button" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i> BUY NOW</button>
+                                <a href="/buyNow?id=<%=products[i]._id%>"> <button type="button" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i> BUY NOW</button></a>
 
                              </div>
-                             <button type="button" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i> <a href="/view-products?id=<%= products[i]._id %>"> VIEW PRODUCT</a></button>
+                             <button type="button" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i> <a href="/view-products?id=<%= products[i]._id%>"> VIEW PRODUCT</a></button>
                          </div>
 
 
@@ -65,21 +134,38 @@
                       
     </div> 
     <%}%>
-<!-- ---------------------------------------------------------------------------------------------------------------------------- -->
 
 
 
  
 </div>
 
+
+
+
+
+<div class="container">
+ 
+  <div class="pagination p12">
+    <ul>
+    <%for(i=1;i <= totalpage ;i++){%>
+      <a  class="is-active"  href="/pagination?page=<%=i%>&id=page-1-link&sort=<%=sort%>&category=<%=category1%>"><li><%=i%></li></a>
+     
+    <%}%>
+    </ul>
+  </div>
+</div>
+
        
       
         
 
-<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
         <%- include("../user/layout/userfooter.ejs")%>
 
         <style>
+            .btn {
+  padding: .55rem 1.5rem .45rem;
+}
             body {
     margin: 0;
     font-family: Roboto,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
@@ -88,7 +174,7 @@
     line-height: 1.5385;
     color: #333;
     text-align: left;
-    background-color: #8b9faf;
+    background-color: #d6e2e9;
 }
 
 .mt-50{
@@ -137,7 +223,7 @@
 }
 
 .bg-cart {
-    background-color:orange;
+    background-color:rgb(12, 11, 10);
     color:#fff;
 }
 
@@ -160,6 +246,248 @@ a{
 
     text-decoration: none !important;
 }
+
+
+/* jafsgjsdgfsjh */
+html, body{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans', sans-serif;
+  color: #222;
+}
+
+a{
+  text-decoration: none;
+}
+
+p, li, a{
+  font-size: 14px;
+}
+
+/* GRID */
+
+.twelve { width: 100%; }
+.eleven { width: 91.53%; }
+.ten { width: 83.06%; }
+.nine { width: 74.6%; }
+.eight { width: 66.13%; }
+.seven { width: 57.66%; }
+.six { width: 49.2%; }
+.five { width: 40.73%; }
+.four { width: 32.26%; }
+.three { width: 23.8%; }
+.two { width: 15.33%; }
+.one { width: 6.866%; }
+
+/* COLUMNS */
+
+.col {
+	display: block;
+	float:left;
+	margin: 1% 0 1% 1.6%;
+}
+
+.col:first-of-type {
+  margin-left: 0;
+}
+
+.container{
+  width: 100%;
+  max-width: 940px;
+  margin: 0 auto;
+  position: relative;
+  text-align: center;
+}
+
+/* CLEARFIX */
+
+.cf:before,
+.cf:after {
+    content: " ";
+    display: table;
+}
+
+.cf:after {
+    clear: both;
+}
+
+.cf {
+    *zoom: 1;
+}
+
+/* GENERAL STYLES */
+
+.pagination{
+  padding: 30px 0;
+}
+
+.pagination ul{
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.pagination a{
+  display: inline-block;
+  padding: 10px 18px;
+  color: #222;
+}
+
+/* ONE */
+
+.p1 a{
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  padding: 0;
+  text-align: center;
+}
+
+
+
+
+/* FOUR */
+
+.p4 a{
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 100%;
+  padding: 0;
+  text-align: center;
+  position: relative;
+  border: 3px solid #c97617;
+}
+
+
+
+
+.p5 .is-active{
+  background-color:  #c97617;
+}
+
+/* SIX */
+
+.p6 a{
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  padding: 0;
+  margin: auto 5px;
+  text-align: center;
+  position: relative;
+  background-color:  #c97617;
+}
+
+.p6 .is-active{
+  background-color: #2ecc71;
+}
+
+/* SEVEN */
+
+.p7 a{
+  border: 3px solid #2ecc71;
+  margin: auto 5px;
+  color: #2ecc71;
+  font-weight: bold;
+}
+
+.p7 .is-active{
+  background-color: #2ecc71;
+  color: #fff;
+}
+
+/* EIGHT */
+
+.p8 a{
+  background-color: #2ecc71;
+  margin: auto 5px;
+  color: #fff;
+  font-weight: bold;
+  border: 3px solid #2ecc71;
+}
+
+.p8 .is-active{
+  background-color: #fff;
+  color: #2ecc71;
+}
+
+/* NINE */
+
+.p9 a{
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  padding: 0;
+  text-align: center;
+  margin: auto 5px;
+}
+
+.p9 a.is-active{
+  border: 3px solid #2ecc71;
+  border-radius: 100%;
+}
+
+/* TEN */
+
+.p10 a{
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  padding: 0;
+  text-align: center;
+  margin: auto 5px;
+}
+
+.p10 a.is-active{
+  border: 3px solid #2ecc71;
+}
+
+/* ELEVEN */
+
+.p11 a{
+  background-color: #2ecc71;
+  margin: auto 5px;
+  color: #fff;
+  border: 3px solid #2ecc71;
+  position: relative;
+}
+
+.p11 a:first-of-type:before{
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -25px;
+  border-top: 22px solid transparent;
+  border-bottom: 22px solid transparent;
+  border-right: 22px solid #2ecc71;
+}
+
+.p11 a:last-of-type:after{
+  content: "";
+  position: absolute;
+  top: -3px;
+  right: -25px;
+  border-top: 22px solid transparent;
+  border-bottom: 22px solid transparent;
+  border-left: 22px solid #2ecc71;
+}
+
+.p11 .is-active{
+  font-weight: bold;
+}
+
+/* TWELVE */
+
+.p12 a:first-of-type, .p12 a:last-of-type, .p12 .is-active{
+  background-color: #d88628;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* fasjfkashffgsff */
  </style>
          
 

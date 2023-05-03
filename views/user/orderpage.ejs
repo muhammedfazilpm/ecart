@@ -1,0 +1,51 @@
+<%- include("../user/layout/userheader.ejs")%>
+
+<div class="container">
+  <%if(orderdetails.length>0){%>
+  <p style="color: rgb(10, 3, 17);" class="text-center mb-4">ORDER DETAILS OF( <%=orderdetails[0].user%>)</p>
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>ORDER ID</th>
+        <th>PAYMENT MODE</th>
+        <th>DATE OF ORDER</th>
+        <th>ORDER STATUS</th>
+        <th>COUPON AMOUNT</th>
+        <th>VIEW DETAILS</th>
+       
+        <th>CANCELORDER</th>
+        <th>INVOICE</th>
+      </tr>
+    </thead>
+  
+    <%for(let i=0;i < orderdetails.length ;i++ ){%>
+    <tbody>
+      <tr>
+        <td><%=orderdetails[i]._id.toString().substring(10,18)%></td>
+        <td><%=orderdetails[i].paymentmethod%></td>
+        <td><%=orderdetails[i].date.toISOString().substring(0,10)%></td>
+        <td><%=orderdetails[i].status%></td>
+        <td><%=orderdetails[i].couponamount%></td>
+        <td>  <a href="/vieworder?id=<%=orderdetails[i]._id %>"> <button type="button" class="btn btn-dark rounded-pill m-2">view</button></a> </td>
+      <%if(orderdetails[i].status=="CANCELED"){%>
+                <td>ORDER CANCELED</td>
+       <% }else if (orderdetails[i].status=="PLACED"){%>
+        <td>  <a href="/return?id=<%=orderdetails[i]._id %>"> <button type="button" class="btn btn-dark rounded-pill m-2">cancel</button></a> </td>
+        <%} else if(orderdetails[i].status=="DELIVERD") {%>
+          <td> <a href="/retunorder?id=<%=orderdetails[i]._id %>"> <button type="button" class="btn btn-dark rounded-pill m-2">Return</button></td>
+          <%} else { %>
+          <td><%=orderdetails[i].status%></td>
+          <%}%>
+        <td>  <a href="/invoice?id=<%=orderdetails[i]._id %>"> <button type="button" class="btn btn-dark rounded-pill m-2">invoce</button></a> </td>
+      
+      </tr>
+      
+    </tbody>
+    <%}} else {%>
+     <div style="display: flex;text-align: center;background-color: aqua;width: 10%;"> <h3>YOU DON'T HAVE AN ORDER YET !</h3> </div>
+   
+      <%}%>
+  </table>
+</div>
+
+<%- include("../user/layout/userfooter.ejs")%>

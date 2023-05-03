@@ -1,0 +1,24 @@
+<%- include("../admin/layouts/admin_header.ejs")%>
+
+
+
+<div style="width: 100%;" class="col-sm-12 col-xl-6">
+    <div class="bg-light rounded h-100 p-4">
+        <h6 class="mb-4">FOR EDIT CATEGORY</h6>
+        <form action="" method="post">
+          <%if(alert!=undefined){%>
+            <p style="color: rgb(207, 15, 15);text-align: center;"><%=alert%></p>
+            <%}%>
+           
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Edit Category</label>
+                <input value="<%=edit.name%>" name="catname" type="text" class="form-control" id="exampleInputPassword1">
+            </div>
+            <input name="id" value="<%=edit._id%>" type="hidden">
+          
+            <button type="submit" class="btn btn-primary">SUBMIT</button>
+        </form>
+    </div>
+
+<%- include("../admin/layouts/admin_footer.ejs")%>

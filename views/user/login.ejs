@@ -1,98 +1,117 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-  	<title>GLOBALCYCLE</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>GLOBALCYCLE</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap"
+      rel="stylesheet"
+    />
 
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	
-	<link rel="stylesheet" href="css/style.css">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
 
-	</head>
-	<body class="img js-fullheight" style="background-image: url(images/images2.jpg);">
-	<section class="ftco-section">
-		<div class="container">
-			<div class="row justify-content-center">
-      
-				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">LOGIN</h2>
-      
-				</div>
-        
-			</div>
-			<div class="row justify-content-center">
-				<div class="col-md-6 col-lg-4">
-					<div class="login-wrap p-0">
-		      
-		      	<form action="/login" method="post" class="signin-form">
-		      		<div class="form-group">
-		      			<input name="email" id="email" type="email" class="form-control" placeholder="email" required="email">
-		      		</div>
-					<p id="emailfield"></p>
-	            <div class="form-group">
-	              <input id="password" name="password" id="password-field" type="password" class="form-control" placeholder="Password" required>
-	              <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
-	            </div>
-				<p id="passwordfield"></p>
-	            <div class="form-group">
-                <%
-                if(typeof message !=='undefined'){
-                %>
-                <p style="color: rgb(224, 194, 194);text-align: center;"><b><%= message %></b></p>
-                <%
-                
-                }
-                %>  
-	            	<button onclick=validation() type="submit" class="form-control btn btn-primary submit px-3" >Login</button>
-	            </div>
-	            <div class="form-group d-md-flex">
-	            	<div class="w-50">
-                  <a href="/register">don't have an account register here</a>
-								</div>
-								<div class="w-50 text-md-right">
-                  <a href="/forget">Forgot password?</a>
-								</div>
-	            </div>
-	          </form>
-	         
-	         
-		      </div>
-				</div>
-			</div>
-		</div>
-	</section>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body
+    class="img js-fullheight"
+    style="background-image: url(images/images2.jpg)"
+  >
+    <section class="ftco-section">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-6 text-center mb-5">
+            <h2 class="heading-section">LOGIN</h2>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-md-6 col-lg-4">
+            <div class="login-wrap p-0">
+              <form action="/login" method="post" class="signin-form">
+                <div class="form-group">
+                  <input
+                    name="email"
+                    id="email"
+                    type="email"
+                    class="form-control"
+                    placeholder="email"
+                    required="email"
+                  />
+                </div>
+                <p id="emailfield"></p>
+                <div class="form-group">
+                  <input
+                    id="password"
+                    name="password"
+                    id="password-field"
+                    type="password"
+                    class="form-control"
+                    placeholder="Password"
+                    required
+                  />
+                  <span
+                    toggle="#password-field"
+                    class="fa fa-fw fa-eye field-icon toggle-password"
+                  ></span>
+                </div>
+                <p id="passwordfield"></p>
+                <div class="form-group">
+                  <% if(typeof message !=='undefined'){ %>
+                  <p style="color: rgb(224, 194, 194); text-align: center">
+                    <b><%= message %></b>
+                  </p>
+                  <% } %>
+                  <button
+                    onclick="validation()"
+                    type="submit"
+                    class="form-control btn btn-primary submit px-3"
+                  >
+                    Login
+                  </button>
+                </div>
+                <div class="form-group d-md-flex">
+                  <div class="w-50">
+                    <a href="/register">don't have an account register here</a>
+                  </div>
+                  <div class="w-50 text-md-right">
+                    <a href="/forget">Forgot password?</a>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-	<script src="js/jquery.min.js"></script>
-  <script src="js/popper.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/main.js"></script>
-
-	</body>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
 </html>
 
 <script>
-	function validation(){
-	const email=document.getElementById("email").value
-	const password=document.getElementById("password").value
-    if(email==""){
-		document.getElementById("emailfield").innerHTML="Please fill the field"
-	}
-	else{
-		document.getElementById("emailfield").innerHTML=""
-	}
-    if (password=="") {
-		document.getElementById("passwordfield").innerHTML="Please fill the password field"
-		
-	}
-	else{
-		document.getElementById("passwordfield").innerHTML=""
-		
-	}
-
-	}
-
-	
+  function validation() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    if (email == "") {
+      document.getElementById("emailfield").innerHTML = "Please fill the field";
+    } else {
+      document.getElementById("emailfield").innerHTML = "";
+    }
+    if (password == "") {
+      document.getElementById("passwordfield").innerHTML =
+        "Please fill the password field";
+    } else {
+      document.getElementById("passwordfield").innerHTML = "";
+    }
+  }
 </script>

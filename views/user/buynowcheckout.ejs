@@ -1,0 +1,207 @@
+<%- include("../user/layout/userheader.ejs")%>
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>CHECKOUT</h2>
+    </div>
+   
+    <div class="row">
+      
+        <div class="col-md-8 order-md-1">
+            <h4 class="mb-3">Billing address</h4>
+            <form id="checkout" class="needs-validation"  >
+                <div class="row">
+                    
+                    
+                </div>
+            </head>
+            <body>
+
+              <div class="container">
+                <div class="row">
+                    <% if(addressdata!=undefined){%>
+                        <% for(let i=0; i < addressdata.address.length; i++) { %>
+                  <div class="col-md-6 offset-md-0">
+                    <div class="card">
+                      <div class="card-body">
+                       
+                        <input type="radio" id="address-<%= i %>" name="address" value="<%= addressdata.address[i] %>">
+                
+                        <h6 class="card-title">  NAME: <%= addressdata.address[i].name %> <%= addressdata.address[i].lastname %></h6>
+                        <p class="card-text"> NO: <%= addressdata.address[i].phone %></p>
+                        <p class="card-text">  PLACE: <%= addressdata.address[i].place %></p>
+                        <p class="card-text">  PLACE: <%= addressdata.address[i].pin %></p>
+                        <p class="card-text">  <%= addressdata.address[i].fulladdress %></p>
+                        <a href="/deleteadress?id=<%= addressdata.address[i]._id %>" class="btn btn-danger">delete</a>
+                        <a href="/editadress?id=<%= addressdata.address[i]._id %>" class="btn btn-primary">EDIT</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <%}}%>
+                </div>
+              </div>
+                <a href="/addadress"><button type="button" class="btn btn-success">Add new address</button></a>
+
+                    
+                     
+                    </div>
+                </div>
+                <div class="mb-3">
+                   
+                    
+                </div>
+                <div class="mb-3">
+                  
+                 
+                    
+                </div>
+                <div class="mb-3">
+                    
+                   
+                </div>
+                <div class="row">
+                    <div class="col-md-5 mb-3">
+                  
+                        
+                         
+                       
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        
+                        <hr class="mb-4">
+                        <h4 class="mb-3">Payment</h4>
+                        <div class="d-block my-3">
+                            <div class="custom-control custom-radio">
+                                <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" value="COD">
+                                <label class="custom-control-label" for="credit">CASH ON DELIVERY</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" value="ONLINE">
+                                <label class="custom-control-label" for="debit">UPI PAYMENT</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required="">
+                                <label class="custom-control-label" for="paypal">DEBIT OR CREDIT CARD</label>
+                            </div>
+                        </div>  
+                       
+                    </div>
+                    <div class="col-md-3 mb-3">
+                       
+                      
+                      
+                    </div>
+                </div>
+                <input type="hidden" id="total1" value="<%=Total%>" >
+                <hr class="mb-4">
+                
+                   
+                </div>
+                <hr class="mb-4">
+                <button type="submit" class="btn btn-primary btn-lg btn-block" >Continue to checkout</button>
+            </form>
+        </div>
+    </div>
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">© 2017-2019 Company Name</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Privacy</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+    </footer>
+</div>
+<%- include("../user/layout/userfooter.ejs")%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <script>
+        $("#checkout").submit((e)=>{
+            let address = $("input[name=address]:checked").val();
+            let paymentMethod = $("input[name=paymentMethod]:checked").val();
+            e.preventDefault()
+           $.ajax({
+            url:"/checkout",
+            method:"post",
+            data:{
+                address:address,
+                paymentMethod:paymentMethod,
+              },
+              success:(response)=>{
+               
+                if(response.success){
+
+                    location.href = "/orderSuccess";
+                    
+              
+            }else{
+                razorpayPayment(response.order);
+               
+            }
+              }
+           })
+
+
+        })
+        function razorpayPayment(order){
+           
+    
+    var options = {
+        "key": "rzp_test_zm2sqh9UiAQ8QG", // Enter the Key ID generated from the Dashboard
+        "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        "currency": "INR",
+        "name": "TZ watches", //your business name
+        "description": "Test Transaction",
+        "image": "https://example.com/your_logo",
+        "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        "handler": function (response){
+          
+// alert(response.razorpay_payment_id);
+// alert(response.razorpay_order_id);
+// alert(response.razorpay_signature)
+            verifyPayment(response, order);
+        },
+        "prefill": {
+            "name": "Gaurav Kumar", //your customer's name
+            "email": "gaurav.kumar@example.com",
+            "contact": "9000090000" 
+        },
+        "notes": {
+            "address": "Razorpay Corporate Office"
+        },
+        "theme": {
+            "color": "#3399cc"
+        }
+    };
+    var rzp1 = new Razorpay(options);
+        rzp1.open();
+  }
+function verifyPayment(payment,order){
+const amount = document.getElementById("total1").value;
+
+$.ajax({
+url:"/verifyPayment",
+method:"post",
+data:{
+  payment,
+  amount,
+  order
+},
+success:(response)=>{
+  if(response.success){
+    location.href = '/orderSuccess';
+  }else{
+    alert('payment failed');
+    location.href = '/home';
+
+  }
+}
+})
+}
+</script>
+
+<%- include("../user/layout/userfooter.ejs")%>
+
+
+
