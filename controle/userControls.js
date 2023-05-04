@@ -205,7 +205,7 @@ const varifyLogin = async (req, res) => {
         if (userData.is_varified == 1) {
           if (userData.is_block == 0) {
             req.session.user_id = userData._id;
-                   
+
             res.redirect("/home");
           } else {
             res.render("login", {
@@ -232,9 +232,16 @@ const varifyLogin = async (req, res) => {
 const loadHome = async (req, res) => {
   try {
     if (req.session.user_id) {
-      const user=req.session.user_id
+      const user = req.session.user_id;
+      const walletuser = await wallet.findOne({ user: user });
+     
+if(!walletuser){
       const newuser = new wallet({ user: user });
       const data = await newuser.save();
+      console.log(data);
+}
+
+
       res.render("home");
     } else {
       res.redirect("/");
@@ -344,13 +351,13 @@ const productPage = async (req, res) => {
   const products2 = await pRData.find({ blocked: 0 });
   const category = await categoryData.find({ blocked: false });
   const totalProducts = products2.length;
-  const category1=1
-  const sort=1
+  const category1 = 1;
+  const sort = 1;
 
   const totalpage = Math.ceil(totalProducts / 6);
 
   try {
-    res.render("Uproduct", { products, category, totalpage,category1,sort });
+    res.render("Uproduct", { products, category, totalpage, category1, sort });
   } catch (error) {
     console.log(error);
   }
@@ -359,67 +366,90 @@ const productPage = async (req, res) => {
 const pagination = async (req, res) => {
   const tagid = req.query.id;
   const page = parseInt(req.query.page) || 1;
-  const sort=req.query.sort
+  const sort = req.query.sort;
   const limit = 6;
-  const category1=req.query.category
-  
+  const category1 = req.query.category;
+
   const startindex = (page - 1) * limit;
 
-  
   try {
-    if (category1==1){
-      if(sort==1){
-        const category = await categoryData.find({ blocked: false });
-        const products = await pRData
-          .find({ blocked: 0})
-          .skip(startindex)
-          .limit(limit).sort({prize:1}).sort({prize:1});
-          const products2 = await pRData.find({ blocked: 0 });
-          const totalProducts=products2.length
-          const totalpage = Math.ceil(totalProducts / 6);
-        res.render("Uproduct", { products, category,totalpage,category1,sort });
-  
-      }
-      else{
+    if (category1 == 1) {
+      if (sort == 1) {
         const category = await categoryData.find({ blocked: false });
         const products = await pRData
           .find({ blocked: 0 })
           .skip(startindex)
-          .limit(limit).sort({prize:1}).sort({prize:-1});
-          const products2 = await pRData.find({ blocked: 0 });
-          const totalProducts=products2.length
-          const totalpage = Math.ceil(totalProducts / 6);
-        res.render("Uproduct", { products, category,totalpage,category1,sort });
-      }
-
-    }
-    else{
-      if(sort==1){
+          .limit(limit)
+          .sort({ prize: 1 })
+          .sort({ prize: 1 });
+        const products2 = await pRData.find({ blocked: 0 });
+        const totalProducts = products2.length;
+        const totalpage = Math.ceil(totalProducts / 6);
+        res.render("Uproduct", {
+          products,
+          category,
+          totalpage,
+          category1,
+          sort,
+        });
+      } else {
         const category = await categoryData.find({ blocked: false });
         const products = await pRData
-          .find({ blocked: 0,catogary:category1})
+          .find({ blocked: 0 })
           .skip(startindex)
-          .limit(limit).sort({prize:1}).sort({prize:1});
-          const products2 = await pRData.find({ blocked: 0 });
-          const totalProducts=products2.length
-          const totalpage = Math.ceil(totalProducts / 6);
-        res.render("Uproduct", { products, category,totalpage,category1,sort });
-  
+          .limit(limit)
+          .sort({ prize: 1 })
+          .sort({ prize: -1 });
+        const products2 = await pRData.find({ blocked: 0 });
+        const totalProducts = products2.length;
+        const totalpage = Math.ceil(totalProducts / 6);
+        res.render("Uproduct", {
+          products,
+          category,
+          totalpage,
+          category1,
+          sort,
+        });
       }
-      else{
+    } else {
+      if (sort == 1) {
         const category = await categoryData.find({ blocked: false });
         const products = await pRData
-          .find({ blocked: 0,catogary:category1 })
+          .find({ blocked: 0, catogary: category1 })
           .skip(startindex)
-          .limit(limit).sort({prize:1}).sort({prize:-1});
-          const products2 = await pRData.find({ blocked: 0 });
-          const totalProducts=products2.length
-          const totalpage = Math.ceil(totalProducts / 6);
-        res.render("Uproduct", { products, category,totalpage,category1,sort });
+          .limit(limit)
+          .sort({ prize: 1 })
+          .sort({ prize: 1 });
+        const products2 = await pRData.find({ blocked: 0 });
+        const totalProducts = products2.length;
+        const totalpage = Math.ceil(totalProducts / 6);
+        res.render("Uproduct", {
+          products,
+          category,
+          totalpage,
+          category1,
+          sort,
+        });
+      } else {
+        const category = await categoryData.find({ blocked: false });
+        const products = await pRData
+          .find({ blocked: 0, catogary: category1 })
+          .skip(startindex)
+          .limit(limit)
+          .sort({ prize: 1 })
+          .sort({ prize: -1 });
+        const products2 = await pRData.find({ blocked: 0 });
+        const totalProducts = products2.length;
+        const totalpage = Math.ceil(totalProducts / 6);
+        res.render("Uproduct", {
+          products,
+          category,
+          totalpage,
+          category1,
+          sort,
+        });
       }
     }
-    
-   
   } catch (error) {
     console.log(error);
   }
@@ -427,124 +457,156 @@ const pagination = async (req, res) => {
 
 // to search prouct from proucts
 const searchprouct = async (req, res) => {
-  
   const products2 = await pRData.find({ blocked: 0 });
-  const totalProducts=products2.length
+  const totalProducts = products2.length;
   const totalpage = Math.ceil(totalProducts / 6);
-  const category1=req.body.category
-  const sort=req.body.sort
- 
+  const category1 = req.body.category;
+  const sort = req.body.sort;
+
   try {
-    let products
+    let products;
     const searchValue = req.body.search;
     const search = searchValue.trim();
 
     if (search != "") {
-      if(sort==1){
-        if (category1==1) {
-          products = await pRData.find({
-            $and: [
-              { name: { $regex: `^${search}`, $options: "i" } },
-              { blocked: 0 },
-            ]
-          }).sort({prize:1});
-          
+      if (sort == 1) {
+        if (category1 == 1) {
+          products = await pRData
+            .find({
+              $and: [
+                { name: { $regex: `^${search}`, $options: "i" } },
+                { blocked: 0 },
+              ],
+            })
+            .sort({ prize: 1 });
+        } else {
+          products = await pRData
+            .find({
+              catogary: category1,
+              $and: [
+                { name: { $regex: `^${search}`, $options: "i" } },
+                { blocked: 0 },
+              ],
+            })
+            .sort({ prize: 1 });
         }
-        else {
-         products = await pRData.find({catogary:category1,
-          $and: [
-            { name: { $regex: `^${search}`, $options: "i" } },
-            { blocked: 0 },
-          ]
-        }).sort({prize:1});}
-       
+
         const category = await categoryData.find({ blocked: false });
-        res.render("Uproduct", { products, category,totalpage,category1,sort});
-      }
-      else{
-        if (category1==1) {
-          products = await pRData.find({
-            $and: [
-              { name: { $regex: `^${search}`, $options: "i" } },
-              { blocked: 0 },
-            ]
-          }).sort({prize:-1});
-          
+        res.render("Uproduct", {
+          products,
+          category,
+          totalpage,
+          category1,
+          sort,
+        });
+      } else {
+        if (category1 == 1) {
+          products = await pRData
+            .find({
+              $and: [
+                { name: { $regex: `^${search}`, $options: "i" } },
+                { blocked: 0 },
+              ],
+            })
+            .sort({ prize: -1 });
+        } else {
+          products = await pRData
+            .find({
+              catogary: category1,
+              $and: [
+                { name: { $regex: `^${search}`, $options: "i" } },
+                { blocked: 0 },
+              ],
+            })
+            .sort({ prize: -1 });
         }
-        else {
-         products = await pRData.find({catogary:category1,
-          $and: [
-            { name: { $regex: `^${search}`, $options: "i" } },
-            { blocked: 0 },
-          ]
-        }).sort({prize:-1});}
-       
+
         const category = await categoryData.find({ blocked: false });
-        res.render("Uproduct", { products, category,totalpage,category1,sort});
+        res.render("Uproduct", {
+          products,
+          category,
+          totalpage,
+          category1,
+          sort,
+        });
       }
-
-
-      }
-
-
-
-
-     
+    }
   } catch (error) {
     console.log(error);
   }
 };
 // to sort the product by its prize
-const sortproduct=async(req,res)=>{
+const sortproduct = async (req, res) => {
   const products2 = await pRData.find({ blocked: 0 });
-  const totalProducts=products2.length
+  const totalProducts = products2.length;
   const totalpage = Math.ceil(totalProducts / 6);
-  const category1=req.query.category
-  let sort=req.query.sort
+  const category1 = req.query.category;
+  let sort = req.query.sort;
   console.log(sort);
   try {
-  
-    if(category1==1){
-      const products=await pRData.find({ blocked: 0}).sort({prize:1})
-    const category = await categoryData.find({ blocked: false });
-    res.render("Uproduct", { products, category,totalpage,category1,sort });
-
-    }
-    else{
-    const products=await pRData.find({ blocked: 0,catogary:category1}).sort({prize:1})
-    const category = await categoryData.find({ blocked: false });
-    res.render("Uproduct", { products, category,totalpage,category1,sort });
+    if (category1 == 1) {
+      const products = await pRData.find({ blocked: 0 }).sort({ prize: 1 });
+      const category = await categoryData.find({ blocked: false });
+      res.render("Uproduct", {
+        products,
+        category,
+        totalpage,
+        category1,
+        sort,
+      });
+    } else {
+      const products = await pRData
+        .find({ blocked: 0, catogary: category1 })
+        .sort({ prize: 1 });
+      const category = await categoryData.find({ blocked: false });
+      res.render("Uproduct", {
+        products,
+        category,
+        totalpage,
+        category1,
+        sort,
+      });
     }
   } catch (error) {
     console.log(error);
-    
   }
-}
+};
 
 // to sort the product by its prize in oposit order
-const dsortproduct=async(req,res)=>{
+const dsortproduct = async (req, res) => {
   const products2 = await pRData.find({ blocked: 0 });
-  const totalProducts=products2.length
-  const category1=req.query.category
+  const totalProducts = products2.length;
+  const category1 = req.query.category;
   const totalpage = Math.ceil(totalProducts / 6);
-  let sort=req.query.sort
+  let sort = req.query.sort;
   try {
-    if(category1==1){
-      const products=await pRData.find({ blocked: 0}).sort({prize:-1})
-    const category = await categoryData.find({ blocked: false });
-    res.render("Uproduct", { products, category,totalpage,category1,sort});
-
-    }
-    else{
-    const products=await pRData.find({ blocked: 0,catogary:category1}).sort({prize:-1})
-    const category = await categoryData.find({ blocked: false });
-    res.render("Uproduct", { products, category,totalpage,category1,sort});
+    if (category1 == 1) {
+      const products = await pRData.find({ blocked: 0 }).sort({ prize: -1 });
+      const category = await categoryData.find({ blocked: false });
+      res.render("Uproduct", {
+        products,
+        category,
+        totalpage,
+        category1,
+        sort,
+      });
+    } else {
+      const products = await pRData
+        .find({ blocked: 0, catogary: category1 })
+        .sort({ prize: -1 });
+      const category = await categoryData.find({ blocked: false });
+      res.render("Uproduct", {
+        products,
+        category,
+        totalpage,
+        category1,
+        sort,
+      });
     }
   } catch (error) {
     console.log(error);
-    
   }
-}
+};
 
 // to show the product details
 const showProductetails = async (req, res) => {
@@ -575,16 +637,15 @@ const countResend = async (req, res) => {
 
 const sortCategory = async (req, res) => {
   const category1 = req.query.name;
- const sort=1
+  const sort = 1;
   const products = await pRData.find({ catogary: category1, blocked: 0 });
 
   const category = await categoryData.find({ blocked: false });
   const products2 = await pRData.find({ blocked: 0 });
-      const totalProducts=products2.length
-      const totalpage = Math.ceil(totalProducts / 6);
+  const totalProducts = products2.length;
+  const totalpage = Math.ceil(totalProducts / 6);
   try {
-    res.render("Uproduct", { products, category,totalpage,category1,sort });
-
+    res.render("Uproduct", { products, category, totalpage, category1, sort });
   } catch (error) {
     console.log(error);
   }
@@ -604,18 +665,16 @@ const cart = async (req, res) => {
 const showprofile = async (req, res) => {
   const user = req.session.user_id;
   try {
-   
-
     const userprofile = await User.findById({ _id: req.session.user_id });
     const useraddress1 = await address.findOne({ user: req.session.user_id });
     const wallets = await wallet.find({ user: req.session.user_id });
     const walletbalanc = wallets[0].walletbalance;
-   if(useraddress1){
-    var useraddress=useraddress1
-   }else{
-    useraddress=0
-   }
-   console.log(useraddress1);
+    if (useraddress1) {
+      var useraddress = useraddress1;
+    } else {
+      useraddress = 0;
+    }
+    console.log(useraddress1);
     res.render("userprofile", { userprofile, useraddress, walletbalanc });
   } catch (error) {
     console.log(error);
@@ -671,5 +730,5 @@ module.exports = {
   searchprouct,
   pagination,
   sortproduct,
-  dsortproduct
+  dsortproduct,
 };

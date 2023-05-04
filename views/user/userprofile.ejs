@@ -17,16 +17,16 @@
             <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
           </div>
           <div class="card-body p-4">
-            <div class="d-flex text-black">
+            <div class="d-flex flex-column flex-md-row text-black">
               <div class="flex-shrink-0">
                 <img
                   src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
                   alt="Generic placeholder image"
                   class="img-fluid"
-                  style="width: 180px; border-radius: 10px"
+                  style="width: 100%; max-width: 180px; border-radius: 10px"
                 />
               </div>
-              <div style="width: 60%; padding-left: 1%">
+              <div class="flex-grow-1" style="padding-left: 1%">
                 <h5 class="mb-1"><%=userprofile.name%></h5>
                 <p class="mb-2 pb-1" style="color: #2b2a2a">
                   <%=userprofile.email%>

@@ -6,172 +6,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>admin login</title>
   </head>
-  <body>
-    <div class="body"></div>
-    <div class="grad"></div>
-    <div class="header">
-      <div style="font-size: large">admin<span>Globalcycle</span></div>
-    </div>
-    <br />
+  <body style="background-color: #020202; margin: 0;">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <div style="background-color: #030303; padding: 20px; border-radius: 10px;">
+        <div style="font-size: 24px; font-weight: bold; text-align: center; margin-bottom: 20px;">admin<span style="color: #ff6600;">Globalcycle</span></div>
 
-    <div class="login">
-      <form action="" method="post">
-        <% if(typeof message !=='undefined'){ %>
-        <p style="color: rgb(231, 7, 7); text-align: center"><%= message %></p>
-        <% } %>
-        <input type="email" placeholder="email" name="email" /><br />
-        <input type="password" placeholder="password" name="password" /><br />
-        <input type="submit" value="Login" />
-      </form>
+        <div style="text-align: center; margin-bottom: 20px;">
+          <% if(typeof message !=='undefined'){ %>
+          <p style="color: rgb(231, 7, 7);"><%= message %></p>
+          <% } %>
+        </div>
+
+        <form action="" method="post" style="text-align: center;">
+          <div style="margin-bottom: 20px;margin-top: 25px;">
+            <input type="email" placeholder="Email" name="email" style="padding: 10px;  width: 80%; border: none; border-radius: 5px; box-sizing: border-box; font-size: 16px;" />
+          </div>
+
+          <div style="margin-bottom: 10px;">
+            <input type="password" placeholder="Password" name="password" style="padding: 10px; width: 80%; border: none; border-radius: 5px; box-sizing: border-box; font-size: 16px;" />
+          </div>
+          <br><br>
+
+          <div style="margin-bottom: 10px;">
+            <input type="submit" value="Login" style="background-color: #ff6600; color: #fff; border: none; border-radius: 5px; padding: 10px; font-size: 16px; cursor: pointer; width: 50%;" />
+          </div>
+        </form>
+      </div>
     </div>
   </body>
 </html>
 
+
 <style>
-  @import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
-  @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
+  /* @import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
+  @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300); */
 
   body {
     margin: 0;
     padding: 0;
     background: #fff;
-
     color: #fff;
     font-family: Arial;
     font-size: 12px;
-  }
-
-  .body {
-    position: absolute;
-    top: -20px;
-    left: -20px;
-    right: -40px;
-    bottom: -40px;
-    width: auto;
-    height: auto;
     background-image: url("/loginimage/login1.jpg");
-    background-size: cover; /* added property */
+    
+    background-size: 100%; /* added property */
 
-    z-index: 0;
-  }
 
-  .grad {
-    position: absolute;
-    top: -20px;
-    left: -20px;
-    right: -40px;
-    bottom: -40px;
-    width: auto;
-    height: auto;
-    background: -webkit-gradient(
-      linear,
-      left top,
-      left bottom,
-      color-stop(0%, rgba(0, 0, 0, 0)),
-      color-stop(100%, rgba(0, 0, 0, 0.65))
-    ); /* Chrome,Safari4+ */
-    z-index: 1;
-    opacity: 0.7;
-  }
-
-  .header {
-    position: absolute;
-    top: calc(50% - 35px);
-    left: calc(50% - 255px);
-    z-index: 2;
-  }
-
-  .header div {
-    float: left;
-    color: #fff;
-    font-family: "Exo", sans-serif;
-    font-size: 35px;
-    font-weight: 200;
-  }
-
-  .header div span {
-    color: #5379fa !important;
-  }
-
-  .login {
-    position: absolute;
-    top: calc(50% - 75px);
-    left: calc(50% - 50px);
-    height: 150px;
-    width: 350px;
-    padding: 10px;
-    z-index: 2;
-  }
-
-  .login input[type="email"] {
-    width: 250px;
-    height: 30px;
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    border-radius: 2px;
-    color: #fff;
-    font-family: "Exo", sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    padding: 4px;
-  }
-
-  .login input[type="password"] {
-    width: 250px;
-    height: 30px;
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    border-radius: 2px;
-    color: #fff;
-    font-family: "Exo", sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    padding: 4px;
-    margin-top: 10px;
-  }
-
-  .login input[type="submit"] {
-    width: 260px;
-    height: 35px;
-    background: #fff;
-    border: 1px solid #fff;
-    cursor: pointer;
-    border-radius: 2px;
-    color: #a18d6c;
-    font-family: "Exo", sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    padding: 6px;
-    margin-top: 10px;
-  }
-
-  .login input[type="button"]:hover {
-    opacity: 0.8;
-  }
-
-  .login input[type="button"]:active {
-    opacity: 0.6;
-  }
-
-  .login input[type="text"]:focus {
-    outline: none;
-    border: 1px solid rgba(255, 255, 255, 0.9);
-  }
-
-  .login input[type="password"]:focus {
-    outline: none;
-    border: 1px solid rgba(255, 255, 255, 0.9);
-  }
-
-  .login input[type="button"]:focus {
-    outline: none;
-  }
-
-  ::-webkit-input-placeholder {
-    color: rgba(255, 255, 255, 0.6);
-  }
-
-  ::-moz-input-placeholder {
-    color: rgba(255, 255, 255, 0.6);
   }
 </style>
+
+  
