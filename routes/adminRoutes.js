@@ -23,7 +23,7 @@ adminRout.set("views", "./views/admin");
 
 const adminController = require("../controle/adminController");
 const productContoller = require("../controle/productContoller");
-const adminordercontroller = require("../controle/adminordercontroller");
+const adminorderController = require("../controle/adminorderController");
 
 adminRout.get("/", adminauth.isadminLogout, adminController.loadLogin);
 
@@ -184,62 +184,62 @@ adminRout.get(
 
 //-------------------------------------for order management---------------------------------------------------------------------
 //to get the order details to admin page
-adminRout.get("/order", adminauth.isadminLogin, adminordercontroller.getOrder);
+adminRout.get("/order", adminauth.isadminLogin, adminorderController.getOrder);
 
 // TO MAKE THE COD INTO DELIVER
 adminRout.get(
   "/deliver",
   adminauth.isadminLogin,
-  adminordercontroller.deliverOrder
+  adminorderController.deliverOrder
 );
 
 // to get the salesreport
 adminRout.get(
   "/salesreport",
   adminauth.isadminLogin,
-  adminordercontroller.getSales
+  adminorderController.getSales
 );
 
 // root to make the sales report to sort
 adminRout.post(
   "/sortdate",
   adminauth.isadminLogin,
-  adminordercontroller.sortDateSale
+  adminorderController.sortDateSale
 );
 
 //to download the sales report
 adminRout.get(
   "/download",
   adminauth.isadminLogin,
-  adminordercontroller.download
+  adminorderController.download
 );
 
 // to make the order pending
 adminRout.get(
   "/makepending",
   adminauth.isadminLogin,
-  adminordercontroller.makepending
+  adminorderController.makepending
 );
 
 //to make the order place
 adminRout.get(
   "/placeOredr",
   adminauth.isadminLogin,
-  adminordercontroller.placeOrder
+  adminorderController.placeOrder
 );
 
 //to make the order status cancel
 adminRout.get(
   "/cancelorder",
   adminauth.isadminLogin,
-  adminordercontroller.cancelOrder
+  adminorderController.cancelOrder
 );
 
 // to show the detailed view of a order
 adminRout.get(
   "/vieworder",
   adminauth.isadminLogin,
-  adminordercontroller.vieworer
+  adminorderController.vieworer
 );
 
 module.exports = adminRout;

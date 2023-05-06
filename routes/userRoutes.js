@@ -2,7 +2,7 @@ const express = require("express");
 const rout = express();
 const session = require("express-session");
 const sessionSecret = "mysitesessionsecret";
-const cartcontroller = require("../controle/cartcontroller");
+const cartController = require("../controle/cartController");
 const userOrdercontroller = require("../controle/userOrdercontroller");
 
 rout.use(
@@ -98,45 +98,45 @@ rout.post("/editprofile", auth.isLogin, userController.posteitprofile);
 
 
 //to show the cart page
-rout.get("/cart", auth.isLogin, cartcontroller.getCart);
+rout.get("/cart", auth.isLogin, cartController.getCart);
 
 //for the use of cart sending the data to database contain the id of product and user
-rout.post("/addtocart", auth.isLogin, cartcontroller.addtoCart);
+rout.post("/addtocart", auth.isLogin, cartController.addtoCart);
 
 //root for checkout
-rout.get("/checkout", auth.isLogin, cartcontroller.Checkout);
+rout.get("/checkout", auth.isLogin, cartController.Checkout);
 
 //root for the order placement post the check out
-rout.post("/checkout", auth.isLogin, cartcontroller.postCheckout);
+rout.post("/checkout", auth.isLogin, cartController.postCheckout);
 
 //to add a new address for checck out
-rout.get("/addadress", auth.isLogin, cartcontroller.addAddress);
+rout.get("/addadress", auth.isLogin, cartController.addAddress);
 
 //to post address of the address field
-rout.post("/addadress", auth.isLogin, cartcontroller.postAddress);
+rout.post("/addadress", auth.isLogin, cartController.postAddress);
 
 // to remove a item from cart
-rout.post("/removeCart", auth.isLogin, cartcontroller.removeItem);
+rout.post("/removeCart", auth.isLogin, cartController.removeItem);
 
-rout.post("/countIncrees", auth.isLogin, cartcontroller.countincrees);
+rout.post("/countIncrees", auth.isLogin, cartController.countincrees);
 
-rout.post("/verifyPayment", auth.isLogin, cartcontroller.verifyOnlinePayment);
+rout.post("/verifyPayment", auth.isLogin, cartController.verifyOnlinePayment);
 
 // for order controller
-rout.get("/orderSuccess", auth.isLogin, cartcontroller.ordersuccess);
+rout.get("/orderSuccess", auth.isLogin, cartController.ordersuccess);
 
 // for delete address
 
-rout.get("/deleteadress", auth.isLogin, cartcontroller.deleteddress);
+rout.get("/deleteadress", auth.isLogin, cartController.deleteddress);
 
 //to get the edit address route
-rout.get("/editadress", auth.isLogin, cartcontroller.editaddress);
+rout.get("/editadress", auth.isLogin, cartController.editaddress);
 
 // to post the the edited address
-rout.post("/editadress", auth.isLogin, cartcontroller.updateeditaddress);
+rout.post("/editadress", auth.isLogin, cartController.updateeditaddress);
 
 // to check the coupon is valid or not
-rout.post("/couponcheck", auth.isLogin, cartcontroller.checkcoupon);
+rout.post("/couponcheck", auth.isLogin, cartController.checkcoupon);
 
 
 

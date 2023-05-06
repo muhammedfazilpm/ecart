@@ -11,8 +11,8 @@ app.use(express.static(path.join(__dirname, "public/admin")));
 app.use(express.static(path.join(__dirname, "public/product")));
 
 // console.log(path.join(__dirname,'public'));
-const userRout = require("./routes/user_routes");
-const adminRout = require("./routes/admin _Routes");
+const userRout = require("./routes/userRoutes");
+const adminRout = require("./routes/adminRoutes");
 
 app.use((req, res, next) => {
   res.header("Cache-Control", "no-cache,private,no-store,must-revalidate");
