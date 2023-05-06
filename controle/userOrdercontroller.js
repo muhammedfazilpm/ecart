@@ -90,6 +90,12 @@ const orederreturn = async (req, res) => {
 const returnOrder = async (req, res) => {
   try {
     const id = req.query.id;
+    const orderreturn=await orderDetails.findOne({_id:id})  
+    const walletreturn=orderreturn.totalamount-orderreturn.couponamount
+    const walletchange = await wallet.findOneAndUpdate(
+      { user: req.session.user_id },
+      { $inc: { walletbalance: walletreturn } }
+    );
     const returnOrder = await orderDetails.updateOne(
       { _id: id },
       { status: "ORDER RETURNED" }
