@@ -1,4 +1,4 @@
-const Cat = require("../model/catogarymodel");
+const Cat = require("../model/catogaryModel");
 
 const pData = require("../model/productmodel");
 const sharp = require("sharp");
