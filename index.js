@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-mongoose.connect("mongodb+srv://globalone:Fazil%401996@cluster0.kc1dqhf.mongodb.net/globalcycle");
+mongoose.connect("mongodb+srv://globalone:toEJr5yz4nI1aY8x@cluster0.kc1dqhf.mongodb.net/GANG");
 const path = require("path");
 const express = require("express");
 const app = express();

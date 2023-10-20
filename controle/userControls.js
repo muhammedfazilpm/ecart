@@ -48,7 +48,7 @@ const sendVerifyMail = async (name, email, otp) => {
         name +
         ',please click here to<a href="http://localhost:8080/otp">varify</a> and enter the' +
         otp +
-        " for your verification " +
+        " for your verification is" +
         email +
         "</p>",
     };
