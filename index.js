@@ -1,6 +1,11 @@
 var mongoose = require("mongoose");
-mongoose.connect("mongodb+srv://globalone:toEJr5yz4nI1aY8x@cluster0.kc1dqhf.mongodb.net/GANG");
+let dotenv=require('dotenv')
+dotenv.config()
+console.log(process.env.MONGO_URL)
 const path = require("path");
+
+
+mongoose.connect(process.env.MONGO_URL);
 const express = require("express");
 const app = express();
 

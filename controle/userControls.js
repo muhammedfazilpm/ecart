@@ -27,11 +27,15 @@ const securePassword = async (password) => {
 
 //for send mail and otp
 const sendVerifyMail = async (name, email, otp) => {
+  
   try {
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: 587,
       secure: false,
+      tls: {
+        rejectUnauthorized: false,
+      },
       requireTLS: true,
       auth: {
         user: process.env.user,

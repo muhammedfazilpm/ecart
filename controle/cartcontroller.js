@@ -8,8 +8,8 @@ const coupon = require("../model/couponModel");
 const { default: mongoose } = require("mongoose");
 const Razorpay = require("razorpay");
 var instance = new Razorpay({
-  key_id: "rzp_test_zm2sqh9UiAQ8QG",
-  key_secret: "Qy89CcneisBJHA1WHZZB4C3I",
+  key_id: "rzp_test_0ni9kS293dqDMb",
+  key_secret: "GmLQC4yB6WK56zqUhYkOS9TJ",
 });
 let products;
 let Total;
