@@ -5,7 +5,6 @@ const addressData = require("../model/addressmodel");
 const orderDatas = require("../model/ordermodel");
 const wallet = require("../model/walletmodel");
 const coupon = require("../model/couponModel");
-const { default: mongoose } = require("mongoose");
 const Razorpay = require("razorpay");
 var instance = new Razorpay({
   key_id: "rzp_test_0ni9kS293dqDMb",
