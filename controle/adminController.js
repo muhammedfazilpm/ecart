@@ -1,5 +1,5 @@
 const User = require("../model/usermodel");
-const Cat = require("../model/catogaryModel");
+const Cat = require("../model/catogarymodel");
 const Order = require("../model/ordermodel");
 const product = require("../model/productmodel");
 const coupon = require("../model/couponModel");
