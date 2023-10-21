@@ -23,7 +23,7 @@ adminRout.set("views", "./views/admin");
 
 const adminController = require("../controle/adminController");
 const productContoller = require("../controle/productContoller");
-const adminorderController = require("../controle/adminorderController");
+const adminorderController = require("../controle/adminordercontroller");
 
 adminRout.get("/", adminauth.isadminLogout, adminController.loadLogin);
 
