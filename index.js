@@ -1,15 +1,8 @@
 var mongoose = require("mongoose");
-<<<<<<< HEAD
-let dotenv=require('dotenv')
-dotenv.config()
-console.log(process.env.MONGO_URL)
-=======
-mongoose.connect("");
->>>>>>> 3a7d4ce5b2cdc1ef8a93bf7f05f580ac5a85a4e3
-const path = require("path");
-
-
+const dotenv = require('dotenv')
+dotenv.config();
 mongoose.connect(process.env.MONGO_URL);
+const path = require("path");
 const express = require("express");
 const app = express();
 
