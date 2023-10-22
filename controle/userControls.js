@@ -27,6 +27,8 @@ const securePassword = async (password) => {
 
 //for send mail and otp
 const sendVerifyMail = async (name, email, otp) => {
+  console.log(process.env.pass)
+  console.log(process.env.user)
   
   try {
     const transporter = nodemailer.createTransport({
