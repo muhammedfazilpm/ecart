@@ -30,7 +30,7 @@ const addProdut = async (req, res) => {
   const catDatas = await Cat.find({ blocked: false });
 
   try {
-    res.render("addproduct", { catDatas });
+    res.render("addProduct", { catDatas });
   } catch (error) {
     console.log(error);
   }
