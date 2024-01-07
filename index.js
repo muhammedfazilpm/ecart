@@ -26,5 +26,5 @@ app.use("/", userRout);
 app.use("/admin", adminRout);
 
 app.listen(PORT, () => {
-  console.log(`server running on port number:${PORT}`);
+  console.log(`server running at port number:${PORT}`);
 });
